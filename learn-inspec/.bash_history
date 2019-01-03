@@ -47,3 +47,21 @@ inspec exec /root/my_nginx -t ssh://root:password@target
 inspec exec /root/my_nginx 
 inspec exec /root/my_nginx -t ssh://root:password@target
 inspec supermarket exec dev-sec/nginx-baseline -t ssh://root:password@target
+cd /root/
+pwd
+hostname
+whoami
+grep "^umask" /etc/bash.bashrc
+grep "^umask" /etc/profile
+sshpass -p 'password' ssh -o StrictHostKeyChecking=no root@target 'grep "^umask" /etc/bash.bashrc'
+echo $?
+sshpass -p 'password' ssh -o StrictHostKeyChecking=no root@target 'grep "^umask" /etc/profile'
+echo $?
+inspec init profile cis-ubuntu-16.04-lts
+rm cis-ubuntu-16.04-lts/controls/example.rb
+inspec check cis-ubuntu-16.04-lts
+inspec exec cis-ubuntu-16.04-lts -t ssh://root:password@target
+ll
+ls
+inspec init profile dod-stig
+inspec exec dod-stig -t ssh://root:password@target
